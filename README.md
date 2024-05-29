@@ -2,7 +2,7 @@
 
 This project was made as an exercise for the "Rock-Paper-Scissors" lesson in The Odin Project Fundamental path.
 
-The entire game is played on the console, which means that it is possible to exclusivelly use the developer tools of the browser (if present).
+The entire game is played on the console, which means that it is possible to exclusively use the developer tools of the browser (if present).
 
 There are five rounds, each of which the user gets to choose 'Rock', 'Paper' or 'Scissors'. There are several ways to choose each option:
 
