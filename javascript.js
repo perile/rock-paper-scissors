@@ -1,8 +1,20 @@
-console.log("Hello World")
+//html dom
+
+let btnRock = document.querySelector("#rock")
+let btnPaper = document.querySelector("#paper")
+let btnScissors = document.querySelector("#scissors")
+
+let resultTitle = document.createElement("p")
+let resultPlayerComp = document.createElement("p")
+let whoWins = document.createElement("p")
+
+//eventListeners
+btnRock.addEventListener("click", btnActions)
+btnPaper.addEventListener("click", btnActions)
+btnScissors.addEventListener("click", btnActions)
 
 let humanScore = 0
 let computerScore = 0
-
 
 function multipleChoices(choice){
 
@@ -43,15 +55,6 @@ function getComputerChoice(){
 
 }
 
-
-function getHumanChoice(){
-    let choice = prompt("Write \'r\' for Rock, \'p\' for Paper and \'s\' for Scissors")
-
-
-    return multipleChoices(choice)
-}
-
-
 function playRound(humanChoice, computerChoice){
     
     if(
@@ -75,26 +78,38 @@ function playRound(humanChoice, computerChoice){
         console.log(`Current scores: \n Your score: ${humanScore}\n Computer score: ${computerScore}`)
     }
 
-
 }
 
-function playGame(){
-    for(let i = 1; i < 6; i++){
-        console.log(`Round ${i}`)
-        playRound(getHumanChoice(), getComputerChoice())
-
-
-    }
-
-    console.log("The rounds are done, the results are in:")
-    console.log(`Your score: ${humanScore}\n Computer score: ${computerScore}`)
-    if(humanScore > computerScore){
-        console.log("You have won it all!")
-    }else if(humanScore < computerScore){
-        console.log("You have lost, the computer is the victor.")
-    }else{
-        console.log("At the end of it all, it's a draw!")
+//helps append an undetermined number of elements to a container
+function appendChildren(parentNode, ...children){
+    for(let child of children){
+        parentNode.appendChild(child)
     }
 }
 
-playGame()
+//callback function for when user chooses one of the buttons
+function btnActions(){
+    playRound(multipleChoices(this.id), getComputerChoice());
+    finalResults();
+    let divResults = document.querySelector(".results")
+    appendChildren(divResults, resultTitle, resultPlayerComp, whoWins)
+}
+
+//displays final results
+function finalResults(){
+    resultTitle.textContent = "The rounds are done, the results are in:\n"
+
+    resultPlayerComp.textContent = `Your score: ${humanScore}\n Computer score: ${computerScore}`
+
+    if(humanScore >= 5 || computerScore >= 5){
+        if(humanScore > computerScore){
+            whoWins.textContent = "You have won it all!"
+        }else if(humanScore < computerScore){
+            whoWins.textContent = "You have lost, the computer is the victor."
+        }else{
+            whoWins.textContent = "At the end of it all, it's a draw!"
+        }
+    }
+    
+}
+
